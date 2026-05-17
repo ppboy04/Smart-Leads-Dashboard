@@ -90,3 +90,4 @@ smart-leads-dashboard/
 ## Environment Variables
 
 Refer to `.env.example` for the required variables.
+"# Smart-Leads-Dashboard" 

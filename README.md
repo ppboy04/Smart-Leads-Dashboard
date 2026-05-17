@@ -18,7 +18,7 @@ A complete, enterprise-grade, production-ready MERN stack application designed f
 
 | Service | Hosting Platform | Live URL |
 | :--- | :--- | :--- |
-| **Frontend (UI)** | **Vercel** | 🔗 [https://smart-leads-dashboard.vercel.app](https://smart-leads-dashboard-sigma-sage.vercel.app/)  |
+| **Frontend (UI)** | **Vercel** | 🔗 [https://smart-leads-dashboard-sigma-sage.vercel.app](https://smart-leads-dashboard-sigma-sage.vercel.app/)  |
 
 
 > **💡 Note on Architecture:** The frontend is deployed as a high-performance Single Page Application (SPA) on Vercel, securely communicating with the containerized Express REST API hosted on Render.

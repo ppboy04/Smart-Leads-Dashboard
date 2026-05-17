@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
 import app from './app';
 
 const PORT = process.env.PORT || 5000;
@@ -12,19 +11,25 @@ const isValidMongoUri = (uri?: string): boolean => {
 
 const startServer = async () => {
   try {
-    let connectionUri = MONGODB_URI;
-
-    // Use memory server if no URI provided, points to localhost, or is invalid
-    if (!connectionUri || connectionUri.includes('localhost') || !isValidMongoUri(connectionUri)) {
-      if (connectionUri && !isValidMongoUri(connectionUri)) {
-        console.warn(`Warning: MONGODB_URI "${connectionUri}" is not a valid MongoDB connection string. Falling back to In-Memory MongoDB.`);
-      }
-      console.log('Starting local In-Memory MongoDB...');
-      const mongoServer = await MongoMemoryServer.create();
-      connectionUri = mongoServer.getUri();
+    if (!MONGODB_URI || !isValidMongoUri(MONGODB_URI)) {
+      console.error('===========================================');
+      console.error('ERROR: Invalid or missing MONGODB_URI');
+      console.error(`Current value: "${MONGODB_URI || '(not set)'}"`);
+      console.error('');
+      console.error('Please set MONGODB_URI to a valid MongoDB connection string:');
+      console.error('  mongodb+srv://user:pass@cluster.mongodb.net/smart-leads');
+      console.error('');
+      console.error('Get a free database at: https://cloud.mongodb.com');
+      console.error('===========================================');
+      
+      // Start server anyway so health check works
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT} (NO DATABASE - set MONGODB_URI)`);
+      });
+      return;
     }
 
-    await mongoose.connect(connectionUri);
+    await mongoose.connect(MONGODB_URI);
     console.log('Connected to MongoDB');
     
     app.listen(PORT, () => {

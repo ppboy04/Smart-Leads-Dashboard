@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build output
+dist/
+build/
+client/dist/
+server/dist/
+
+# Environment files (keep example files)
+.env
+server/.env
+client/.env
+!.env.example
+!server/.env.example
+!client/.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Docker volumes
+mongo_data/
